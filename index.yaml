@@ -1,0 +1,23 @@
+# LLAMA2
+- name: llama2-7b-tw
+  url: github:progamesigner/localai-model-gallery/llama2-7b-tw.yaml
+  license: Apache 2.0
+
+- name: llama2-13b-tw
+  url: github:progamesigner/localai-model-gallery/llama2-13b-tw.yaml
+  license: Apache 2.0
+
+# Mistral
+- name: mistral-7b
+  url: github:progamesigner/localai-model-gallery/mistral-7.yaml
+  license: Apache 2.0
+
+# Mixtral
+- name: mixtral-8x7B
+  url: github:progamesigner/localai-model-gallery/mixtral-8x7B.yaml
+  license: Apache 2.0
+
+# Bert Embeddings
+- name: bert-MiniLM-L6-v2
+  url: github:progamesigner/localai-model-gallery/bert-MiniLM-L6-v2.yaml
+  license: Apache 2.0

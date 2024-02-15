@@ -1,0 +1,46 @@
+name: mixtral-8x7B
+license: Apache 2.0
+description: This is a mixtral model
+
+urls:
+- https://huggingface.co/NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO-GGUF
+
+config_file: |
+  backend: llama-cpp
+  f16: true
+
+  context_size: 4096
+  gpu_layers: 24
+  mmap: true
+
+  parameters:
+    model: huggingface://NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO-GGUF/Nous-Hermes-2-Mixtral-8x7B-DPO.Q4_K_M.gguf
+    temperature: 0.2
+    top_k: 40
+    top_p: 0.95
+    frequency_penalty: 1.1
+    batch: 512
+    tfz: 1.0
+
+  template:
+    chat: mixtral-chat
+    completion: mixtral-completion
+
+  stopwords:
+  - <|im_end|>
+
+  usage: |
+    You can test this model with curl like this:
+
+    curl http://localhost:8080/v1/chat/completions -X POST -H "Content-Type: application/json" -d '{
+      "model": "mixtral-8x7B",
+      "messages": [{"role": "user", "content": "How are you doing?", "temperature": 0.1}]
+    }'
+
+prompt_templates:
+- name: mixtral-chat
+  content: |
+    [INST] {{.Input}} [/INST]
+- name: mixtral-completion
+  content: |
+    [INST] {{.Input}} [/INST]

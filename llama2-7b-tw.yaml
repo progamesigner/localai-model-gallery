@@ -1,0 +1,51 @@
+name: llama2-7b-tw
+license: Apache 2.0
+description: This is a LLAMA2 model
+
+urls:
+- https://huggingface.co/audreyt/Taiwan-LLM-7B-v2.1-chat-GGUF
+- https://huggingface.co/yentinglin/Taiwan-LLM-7B-v2.1-chat
+
+config_file: |
+  backend: llama-cpp
+  f16: true
+
+  context_size: 4096
+  gpu_layers: 30
+  mmap: true
+
+  parameters:
+    model: huggingface://audreyt/Taiwan-LLM-7B-v2.1-chat-GGUF/Taiwan-LLM-7B-v2.1-chat-Q4_K_M.gguf
+    temperature: 0.2
+    top_k: 80
+    top_p: 0.7
+
+  roles:
+    function: 'Function Result:'
+    assistant_function_call: 'Function Call:'
+    assistant: 'Assitant:'
+    user: 'User:'
+    system: 'System:'
+
+  template:
+    chat: llama2-chat
+
+  system_prompt: You are a helpful AI assistant. The user you are helping speaks Traditional Chinese and comes from Taiwan.
+
+  usage: |
+    You can test this model with curl like this:
+
+    curl http://localhost:8080/v1/chat/completions -X POST -H "Content-Type: application/json" -d '{
+      "model": "llama2-7b-tw",
+      "messages": [{"role": "user", "content": "How are you doing?", "temperature": 0.1}]
+    }'
+
+prompt_templates:
+- name: llama2-chat
+  content: |
+    [INST]
+    {{if .SystemPrompt}}<<SYS>>{{.SystemPrompt}}<</SYS>>{{end}}
+    {{if .Input}}{{.Input}}{{end}}
+    [/INST]
+
+    Assistant:

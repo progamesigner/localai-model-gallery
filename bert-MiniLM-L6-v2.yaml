@@ -1,0 +1,26 @@
+name: bert-MiniLM-L6-v2
+license: Apache 2.0
+description: |
+  Bert model that can be used for embeddings
+
+urls:
+- https://huggingface.co/skeskinen/ggml
+
+config_file: |
+  backend: bert-embeddings
+  embeddings: true
+  f16: true
+
+  gpu_layers: 90
+  mmap: true
+
+  parameters:
+    model: huggingface://mudler/all-MiniLM-L6-v2/ggml-model-q4_0.bin
+
+  usage: |
+    You can test this model with curl like this:
+
+    curl http://localhost:8080/embeddings -X POST -H "Content-Type: application/json" -d '{
+      "model": "bert-MiniLM-L6-v2",
+      "input": "Your text string goes here"
+    }'

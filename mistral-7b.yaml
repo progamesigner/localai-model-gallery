@@ -1,0 +1,51 @@
+name: mistral-7b
+license: Apache 2.0
+description: This is a mistral model
+
+urls:
+- https://huggingface.co/argilla/CapybaraHermes-2.5-Mistral-7B
+- https://huggingface.co/teknium/OpenHermes-2.5-Mistral-7B
+
+config_file: |
+  backend: llama-cpp
+  f16: true
+
+  context_size: 4096
+  gpu_layers: 30
+  mmap: true
+
+  parameters:
+    model: huggingface://TheBloke/CapybaraHermes-2.5-Mistral-7B-GGUF/capybarahermes-2.5-mistral-7b.Q4_K_M.gguf
+    temperature: 0.2
+    top_k: 40
+    top_p: 0.95
+
+  template:
+    chat_message: mistral-chatml
+    chat: mistral-chatml-block
+    completion: mistral-completion
+
+  stopwords:
+  - <|im_end|>
+
+  usage: |
+    You can test this model with curl like this:
+
+    curl http://localhost:8080/v1/chat/completions -X POST -H "Content-Type: application/json" -d '{
+      "model": "mistral-7b",
+      "messages": [{"role": "user", "content": "How are you doing?", "temperature": 0.1}]
+    }'
+
+prompt_templates:
+- name: mistral-chatml
+  content: |
+    <|im_start|>{{if eq .RoleName "assistant"}}assistant{{else if eq .RoleName "system"}}system{{else if eq .RoleName "user"}}user{{end}}
+    {{if .Content}}{{.Content}}{{end}}
+    <|im_end|>
+- name: mistral-chatml-block
+  content: |
+    {{.Input}}
+    <|im_start|>assistant
+- name: mistral-completion
+  content: |
+    {{.Input}}
