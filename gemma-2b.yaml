@@ -1,0 +1,29 @@
+name: gemma-2b
+license: https://ai.google.dev/gemma/terms
+description: This is a Gemma 2B model
+
+urls:
+- https://huggingface.co/mlabonne/gemma-2b-GGUF
+- https://huggingface.co/google/gemma-2b
+
+config_file: |
+  backend: llama-cpp
+  f16: true
+
+  context_size: 4096
+  gpu_layers: 30
+  mmap: true
+
+  parameters:
+    model: huggingface://mlabonne/gemma-2b-GGUF/gemma-2b.Q4_K_S.gguf
+    temperature: 0.2
+    top_k: 80
+    top_p: 0.7
+
+  usage: |
+    You can test this model with curl like this:
+
+    curl http://localhost:8080/v1/chat/completions -X POST -H "Content-Type: application/json" -d '{
+      "model": "gemma-2b",
+      "messages": [{"role": "user", "content": "How are you doing?", "temperature": 0.1}]
+    }'

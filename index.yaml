@@ -1,3 +1,20 @@
+# Gemma
+- name: gemma-2b
+  url: github:progamesigner/localai-model-gallery/gemma-2b.yaml
+  license: https://ai.google.dev/gemma/terms
+
+- name: gemma-2b-it
+  url: github:progamesigner/localai-model-gallery/gemma-2b-it.yaml
+  license: https://ai.google.dev/gemma/terms
+
+- name: gemma-7b
+  url: github:progamesigner/localai-model-gallery/gemma-7b.yaml
+  license: https://ai.google.dev/gemma/terms
+
+- name: gemma-7b-it
+  url: github:progamesigner/localai-model-gallery/gemma-7b-it.yaml
+  license: https://ai.google.dev/gemma/terms
+
 # LLAMA2
 - name: llama2-7b-tw
   url: github:progamesigner/localai-model-gallery/llama2-7b-tw.yaml
